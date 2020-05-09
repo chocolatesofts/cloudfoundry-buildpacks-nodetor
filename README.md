@@ -1,4 +1,5 @@
-# Cloud Foundry NodeTor build pack based on Node.js Buildpack (https://github.com/cloudfoundry/nodejs-buildpack)
+# Cloud Foundry NodeTor build pack 
+### based on Node.js Buildpack (https://github.com/cloudfoundry/nodejs-buildpack)
 
 A Cloud Foundry [buildpack](http://docs.cloudfoundry.org/buildpacks/) for Node based apps with added Tor support
 Supplement for libraries like [tor-request](https://www.npmjs.com/package/tor-request)
