@@ -1,8 +1,7 @@
-# Cloud Foundry Node.js Buildpack
+# Cloud Foundry NodeTor build pack based on Node.js Buildpack (https://github.com/cloudfoundry/nodejs-buildpack)
 
-[![CF Slack](https://www.google.com/s2/favicons?domain=www.slack.com) Join us on Slack](https://cloudfoundry.slack.com/messages/buildpacks/)
-
-A Cloud Foundry [buildpack](http://docs.cloudfoundry.org/buildpacks/) for Node based apps.
+A Cloud Foundry [buildpack](http://docs.cloudfoundry.org/buildpacks/) for Node based apps with added Tor support
+Supplement for libraries like [tor-request](https://www.npmjs.com/package/tor-request)
 
 ### Buildpack User Documentation
 
@@ -39,55 +38,13 @@ To build this buildpack, run the following commands from the buildpack's directo
     cf create-buildpack [BUILDPACK_NAME] [BUILDPACK_ZIP_FILE_PATH] 1
     cf push my_app [-b BUILDPACK_NAME]
     ```
-
-### Testing
-
-Buildpacks use the [Cutlass](https://github.com/cloudfoundry/libbuildpack/tree/master/cutlass) framework for running integration tests.
-
-To test this buildpack, run the following command from the buildpack's directory:
-
-1. Source the .envrc file in the buildpack directory.
-
-   ```bash
-   source .envrc
-   ```
-   To simplify the process in the future, install [direnv](https://direnv.net/) which will automatically source .envrc when you change directories.
-
-1. Run unit tests
-
-    ```bash
-    ./scripts/unit.sh
-    ```
-
-1. Run integration tests
-
-   Buildpacks use the [Cutlass](https://github.com/cloudfoundry/libbuildpack/tree/master/cutlass) framework for running integration tests against Cloud Foundry. Before running the integration tests, you need to login to your Cloud Foundry using the [cf cli](https://github.com/cloudfoundry/cli):
-
-    ```bash
-    cf login -a https://api.your-cf.com -u name@example.com -p pa55woRD
-    ```
-
-   Note that your user requires permissions to run `cf create-buildpack` and `cf update-buildpack`. To run the integration tests, run the following command from the buildpack's directory:
-
-    ```bash
-    ./scripts/integration.sh
-    ```
-
 ### Contributing
 
-Find our guidelines [here](./CONTRIBUTING.md).
-
-### Help and Support
-
-Join the #buildpacks channel in our [Slack community](http://slack.cloudfoundry.org/).
+Feel free to contribute here.
 
 ### Reporting Issues
 
 Open an issue on this project.
-
-### Active Development
-
-The project backlog is on [Pivotal Tracker](https://www.pivotaltracker.com/projects/1042066).
 
 ### Acknowledgements
 
