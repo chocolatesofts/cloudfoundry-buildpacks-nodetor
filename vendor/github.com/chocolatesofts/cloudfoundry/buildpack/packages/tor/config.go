@@ -142,7 +142,7 @@ func (conp *ConfigPort) getCommand() string{
 	if(conp.Pass!=""){
 		basecomm=basecomm+"\ntorpass=$(tor --hash-password \""+conp.Pass+"\")"
 	}
-	basecomm=basecomm+"\nnohup tor "
+	basecomm=basecomm+"\n#nohup tor "
 	if(conp.Config!=""){
 		basecomm=basecomm+"-f "+conp.Config+" "
 	}
