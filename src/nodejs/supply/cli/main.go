@@ -110,4 +110,5 @@ func main() {
 		logger.Error("Unable to clean up app cache: %s", err)
 		os.Exit(19)
 	}
+	logger.Info("in stage : "+stager.DepDir())
 }

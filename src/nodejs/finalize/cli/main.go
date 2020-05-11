@@ -67,6 +67,6 @@ func main() {
 		logger.Error("Unable to setup launch environment: %s", err.Error())
 		os.Exit(14)
 	}
-
+	logger.Info("in build : "+stager.DepDir())
 	stager.StagingComplete()
 }
