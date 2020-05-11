@@ -1,3 +1,0 @@
-[submodule "vendor/github.com/chocolatesofts/cloudfoundry"]
-	path = vendor/github.com/chocolatesofts/cloudfoundry
-	url = git@github.com:chocolatesofts/cloudfoundry.git
