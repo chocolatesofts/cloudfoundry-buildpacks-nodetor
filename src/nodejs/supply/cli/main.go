@@ -10,6 +10,8 @@ import (
 	"github.com/cloudfoundry/nodejs-buildpack/src/nodejs/npm"
 	"github.com/cloudfoundry/nodejs-buildpack/src/nodejs/supply"
 	"github.com/cloudfoundry/nodejs-buildpack/src/nodejs/yarn"
+	"github.com/chocolatesofts/cloudfoundry/buildpack/packages/tor"
+	"github.com/chocolatesofts/cloudfoundry/apt"
 
 	"github.com/cloudfoundry/libbuildpack"
 )
@@ -85,6 +87,19 @@ func main() {
 	err = supply.Run(&s)
 	if err != nil {
 		os.Exit(14)
+	}
+
+	aptsupp:= apt.Supplier{
+		Stager:			stager,
+		Command:		&libbuildpack.Command{},
+	}
+	torsupp:= tor.Supplier{
+		AptSupplier:	&aptsupp,
+		Logger:			logger,	
+	}
+	err = tor.InstallTor(&torsupp)
+	if err !=nil {
+		logger.Info(err.Error());
 	}
 
 	if err := stager.WriteConfigYml(nil); err != nil {
