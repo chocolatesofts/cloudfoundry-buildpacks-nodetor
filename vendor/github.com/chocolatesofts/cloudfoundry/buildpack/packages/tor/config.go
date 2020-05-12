@@ -130,7 +130,7 @@ func ParseConfig(file string) (configs []ConfigPort,err error){
 			if(len(cport)>num){
 				tcport=cport[num]
 			}	
-			portconfigs=append(portconfigs,ConfigPort{sport[num],tcport,cpass,conf,""})
+			portconfigs=append(portconfigs,ConfigPort{sport[num],tcport,cpass,conf})
 		}
 	}
 	configs = portconfigs
@@ -138,7 +138,7 @@ func ParseConfig(file string) (configs []ConfigPort,err error){
 	return
 }
 func (conp *ConfigPort) getCommand(tmpdir string) string{
-	tmpdir=filepath.Join(tmpdir,"datadirs",conp.SockPort)
+	tmpdir=filepath.Join(tmpdir,"datadirs",strconv.Itoa(conp.SockPort))
 	basecomm:= "mkdir -p "+tmpdir
 	if(conp.Pass!=""){
 		basecomm=basecomm+"\ntorpass=$(tor --hash-password \""+conp.Pass+"\")"
