@@ -15,6 +15,8 @@ const(
 	header="#Begin Setup : %s\n"
 	footer="#End Setup : %s\n"
 	scriptfile="torprepare.sh"
+	tempdir="temptordir"
+	tempmakecommand=tempdir+"=$(mktemp -d -t torXXXX)"
 )
 func PrepareScript(confs []ConfigPort,fname string,depdir string) error{
 	if(Scripts[fname]!=""){
@@ -36,7 +38,7 @@ func PrepareScript(confs []ConfigPort,fname string,depdir string) error{
 			Configfiles[config.Config]=cfile
 			config.Config=cfile
 		}
-		script=script+"\n"+config.getCommand()
+		script=script+"\n"+config.getCommand("$"+tempdir)
 	}
 	script=script+"\n"+fmt.Sprintf(footer,fname)
 	Scripts[fname]=script
@@ -74,7 +76,7 @@ func WriteTorConfigs(stager *apt.Stager) error{
 }
 
 func WritePrepareScript(stager *apt.Stager) error{
-	totalscript:=""
+	totalscript:=tempmakecommand+"\n"
 	for _,script:= range Scripts{
 		totalscript=totalscript+script
 	}

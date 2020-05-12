@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"strings"
 	"errors"
+	"path/filepath"
 	"github.com/cloudfoundry/libbuildpack"
 )
 
@@ -24,7 +25,6 @@ type ConfigPort struct{
 	ControlPort		int
 	Pass 			string
 	Config 			string
-	Datadir 		string
 }
 func determinePort(Port string) []int {
 	if(strings.Contains(Port,"..")){
@@ -137,8 +137,9 @@ func ParseConfig(file string) (configs []ConfigPort,err error){
 	err = nil
 	return
 }
-func (conp *ConfigPort) getCommand() string{
-	basecomm:= "mkdir -p "+conp.Datadir
+func (conp *ConfigPort) getCommand(tmpdir string) string{
+	tmpdir=filepath.Join(tmpdir,"datadirs",conp.SockPort)
+	basecomm:= "mkdir -p "+tmpdir
 	if(conp.Pass!=""){
 		basecomm=basecomm+"\ntorpass=$(tor --hash-password \""+conp.Pass+"\")"
 	}
@@ -150,7 +151,7 @@ func (conp *ConfigPort) getCommand() string{
 	if(conp.Pass!=""){
 		basecomm=basecomm+" HashedControlPassword $torpass"
 	}
-	basecomm=basecomm+" DATADirectory "+conp.Datadir+" &"
+	basecomm=basecomm+" DATADirectory "+tmpdir+" &"
 	return basecomm
 }
 
